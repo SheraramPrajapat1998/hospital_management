@@ -6,10 +6,10 @@ from django.conf import settings
 class Profile(models.Model):
     "User Table"
     USER_TYPE = (
-        ('patient', 'P'),
-        ('doctor', 'D'),
-        ('nurse', 'N'),
-        ('admin', 'A'),        
+        ('patient', 'Patient'),
+        ('doctor', 'Doctor'),
+        ('nurse', 'Nurse'),
+        ('admin', 'Admin'),        
     )
     user            = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     full_name       = models.CharField(max_length=50, default="")
@@ -19,6 +19,7 @@ class Profile(models.Model):
     photo           = models.ImageField(default="default.png", upload_to="users/%Y/%m/%d", blank=True)
     created         = models.DateTimeField(auto_now_add=True)
     updated         = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return f"{self.user}"
 

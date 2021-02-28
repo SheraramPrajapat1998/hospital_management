@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.forms import fields
-
+from django.conf import settings
 from .models import Profile
 
 
@@ -18,6 +17,14 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError("Passwords don't match")
         return cd['password2']
+
+
+class ProfileRegistrationForm(forms.ModelForm):
+    date_of_birth = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+
+    class Meta:
+        model = Profile
+        fields = ['user_type', 'full_name', 'date_of_birth', 'mobile_num', 'photo']
 
 
 class UserEditForm(forms.ModelForm):

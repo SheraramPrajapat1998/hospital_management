@@ -140,6 +140,7 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
+DATE_INPUT_FORMATS = ('%d-%m-%Y', '%Y-%m-%d')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

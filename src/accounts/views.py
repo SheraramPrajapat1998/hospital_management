@@ -1,16 +1,10 @@
 from django.shortcuts import redirect, render
 from .models import Profile
-from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
+from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm, ProfileRegistrationForm
 from django.contrib import auth
 import sweetify
 from django.http import HttpResponse
 from django.contrib import messages
-
-# def register(request):
-#     if request.method == 'POST':
-#         user_form = UserRegistrationForm(request.POST)
-#         if user_form.is_valid():
-#             new_user = user_form.save(commit=False)
 
 
 def login(request):
@@ -49,14 +43,21 @@ def dashboard(request):
 
 def register(request):
     user_form = UserRegistrationForm()
+    profile_form = ProfileRegistrationForm()
     if request.method == 'POST':
         user_form = UserRegistrationForm(data=request.POST)
-        if user_form.is_valid():
+        profile_form = ProfileRegistrationForm(data=request.POST, files=request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            cd = profile_form.cleaned_data
+            print(cd['user_type'])
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
+            profile = profile_form.save(commit=False)
+            profile.user = new_user
+            profile.save()
             return render(request, 'accounts/register_done.html', {'new_user': new_user})
-    return render(request, 'accounts/register.html', {'user_form':user_form})
+    return render(request, 'accounts/register.html', {'user_form':user_form, 'profile_form':profile_form})
 
 def logout(request):
     """
