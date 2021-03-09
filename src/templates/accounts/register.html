@@ -4,13 +4,27 @@
 {% block title %}Create an account{% endblock %}
 
 {% block content %}
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'patient_register' %}">Register Patient</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="{% url 'doctor_register' %}">Register Doctor</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'receptionist_register' %}">Register Receptionist</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'nurse_register' %}">Register Nurse</a>
+  </li>
+</ul>
 <div class="offset-md-3 col-md-6">  
   <h1>Create an account</h1>
   <p>Please, sign up using the following form:</p>
   <form method="post" action="" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ profile_form|crispy }}
     {{ user_form|crispy }}
+    {{ profile_form|crispy }}
     <p><input type="submit" value="Create my account" class="btn btn-success"></p>
   </form>
 </div>

@@ -16,7 +16,8 @@
       </form>
     </div>
     <div class="col-md-6">
-      <img src="{{ request.user.profile.photo.url }}" width="200px" class="img-thumbnail" alt="">
+      <img src="{{ request.user.photo.url }}" width="200px" class="img-thumbnail" alt="profile_pic">
+      <div>User Type: <strong>{{ request.user.profile.user_type|upper }}</strong></div>
     </div>
   </div>
 {% endblock %}
