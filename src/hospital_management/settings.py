@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     # local apps
     'accounts.apps.AccountsConfig',
+    'case.apps.CaseConfig',
 
     # third party apps
     'sweetify',

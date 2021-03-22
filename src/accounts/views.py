@@ -2,7 +2,8 @@ from django import forms
 from django.core.checks.messages import Error
 from django.db.models.base import Model
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views.generic.edit import FormView
+from django.views.generic.base import TemplateResponseMixin
+from django.views.generic.edit import FormMixin, FormView
 from .models import Patient, Doctor, User, Receptionist
 from .forms import AccountantRegistrationForm, DoctorRegistrationForm, NurseRegistrationForm, ReceptionistRegistrationForm, UserRegistrationForm, UserEditForm, PatientRegistrationForm
 from django.contrib import auth
@@ -56,6 +57,67 @@ def generate_groups(request):
 # def register_doctor(request):
 #     return register(request, profile_form=DoctorRegistrationForm, model_name=Doctor, user_type='doctor')
 
+# class UserRegistrationMixin(FormMixin, View):
+#     form_class = UserRegistrationForm
+#     template_name = 'accounts/register.html'
+
+#     def get_context_data(self, **kwargs):
+#         # self.object = self.get_object()
+#         context = super().get_context_data(**kwargs)
+#         context['user_form'] = self.form_class
+#         return context
+    
+#     # def render(self, request):
+#     #     return self.render_to_response({'user_form':user_form})
+
+#     def get_user_form(self, data=None, files=None, group_name='Patient'):
+#         user_form = self.form_class(data, files, group_name)
+#         return user_form
+
+#     def get(self, request, *args, **kwargs):
+#         return self.render_to_response(self.get_context_data())
+    
+#     def post(self, request, group_name='Patient', *args, **kwargs):
+#         user_form = self.get_user_form(data=request.POST, files=request.FILES, group_name=group_name)
+#         if user_form.is_valid():
+#             new_user = user_form.save(commit=False)
+#             password = user_form.cleaned_data['password']
+#             new_user.set_password(password)
+#             new_user.save()
+#             messages.success(request, f'New user "{new_user}" created!')
+#             group, created = Group.objects.get_or_create(group_name)
+#             if created:
+#                 messages.info(request, f"New group {group} created. Please add it's permissions or contact admin")
+#         return self.render_to_response({'user_form':user_form})
+
+# class PatientRegistrationView(UserRegistrationMixin, TemplateResponseMixin):
+#     model = Patient
+#     profile_form_class = PatientRegistrationForm
+#     template_name = 'accounts/register.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['profile_form'] = self.profile_form_class
+#         return context
+
+#     def get_patient_form(self, data=None, files=None, model_name='Patient'):
+#         profile_form = self.profile_form_class(data, files, model_name)
+#         return profile_form
+
+#     def get(self, request, *args, **kwargs):
+#         return render(request, self.template_name, self.get_context_data())
+    
+#     # @transaction.atomic
+#     def post(self, request, *args, **kwargs):
+#         profile_form = self.get_patient_form(data=request.POST, files=request.FILES, model_name='Patient')
+#         if profile_form.is_valid():
+#             model_name.objects.create()
+#             # profile = profile_form.save(commit=False)
+#             # profile.user = new_user
+#             # profile.save()
+#             messages.success(request, f'Profile for user created!')
+#         return render(request, self.template_name, self.get_context_data())
+
 @transaction.atomic
 def register_patient(request):
     u_form = UserRegistrationForm(data=request.POST or None, files=request.FILES or None)
@@ -66,6 +128,7 @@ def register_patient(request):
         user.save()
         profile = p_form.save(commit=False)
         profile.user = user
+        profile.user_type = 'patient'
         profile.save()
         group, created = Group.objects.get_or_create(name='Patient')
         if created:
@@ -85,6 +148,7 @@ def register_doctor(request):
         user.save()
         profile = p_form.save(commit=False)
         profile.user = user
+        profile.user_type = 'doctor'
         profile.save()
         group, created = Group.objects.get_or_create(name="Doctor")
         if created:
@@ -103,6 +167,7 @@ def register_doctor(request):
         user.save()
         profile = p_form.save(commit=False)
         profile.user = user
+        profile.user_type = 'doctor'
         profile.save()
         group, created = Group.objects.get_or_create(name="Doctor")
         if created:
@@ -121,6 +186,7 @@ def register_receptionist(request):
         user.save()
         profile = p_form.save(commit=False)
         profile.user = user
+        profile.user_type = 'receptionist'
         profile.save()
         group, created = Group.objects.get_or_create(name="Nurse")
         if created:
@@ -139,6 +205,7 @@ def register_nurse(request):
         user.save()
         profile = p_form.save(commit=False)
         profile.user = user
+        profile.user_type = 'nurse'        
         profile.save()
         group, created = Group.objects.get_or_create(name="Nurse")
         if created:
@@ -193,6 +260,7 @@ def login(request):
                 return redirect('login')
         return render(request, 'accounts/login.html')
 
+@login_required
 def dashboard(request):
     context = {
         'user':"sd"

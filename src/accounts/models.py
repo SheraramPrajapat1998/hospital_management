@@ -36,7 +36,7 @@ USER_TYPES = (
 )
 
 class User(AbstractUser):
-    # user_type       = models.CharField(choices=USER_TYPES, default='patient', max_length=20)
+    user_type       = models.CharField(choices=USER_TYPES, default='patient', max_length=20)
     date_of_birth   = models.DateField(blank=True, null=True, validators=[validate_future_date])
     phone_regex     = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+9199999999'. Up to 15 digits allowed.")
     mobile_num      = models.CharField(max_length=15, validators=[phone_regex])

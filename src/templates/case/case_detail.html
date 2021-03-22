@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Case Details
+{% endblock title %}
+
+{% block content %}
+    <h1>Case Details</h1>
+    <div class="table-responsive">
+        <table id="dtBasicExample" class="table table-hover table-bordered">
+            <tbody>
+                <tr>
+                    <th scope="row">Case ID: </th>
+                    <td>{{ case.id }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Patient Name: </th>
+                    <td>{{ case.patient.get_fullname }}</td>                    
+                </tr>
+                <tr>
+                    <th scope="row">Patient's Username: </th>
+                    <td>{{ case.patient.username }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Receptionist Name: </th>
+                    <td>{{ case.receptionist }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Date Case Filed on: </th>
+                    <td>{{ case.filed_date }}</td>
+                </tr>
+                
+                {% if case.closed_date %}
+                <tr>
+                    <th scope="row">Date Case Closed on: </th>
+                    <td>{{ case.closed_date }}</td>
+                </tr>
+                {% endif %}                
+                <tr>
+                    <th scope="row">Case Status</th>
+                    <td>
+                        <strong {% if case.status == 'open' %} style=" color: green;" {% else %} style="color: red;" {% endif %}>
+                            {{ case.status|upper }}
+                        </strong>
+                    </td>
+                </tr>                
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}
+    
