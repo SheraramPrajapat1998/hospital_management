@@ -1,5 +1,3 @@
-from os import close
-from django.http import request
 from django.http.response import Http404
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
@@ -25,6 +23,7 @@ def generate_case(request):
 
 class CommonMixin(LoginRequiredMixin, PermissionRequiredMixin):
     model = Case
+    permission_required = "case.view_case"
 
 class CaseFormMixin(CommonMixin):
     form_class = CaseForm
@@ -33,7 +32,7 @@ class CaseFormMixin(CommonMixin):
 class CaseListView(CommonMixin, ListView):
     template_name = 'case/case_list.html'
     context_object_name = 'cases'
-
+    # permission_required = "case.view_case"
     # def get_queryset(self):
     #     return super().get_queryset() 
 
@@ -50,11 +49,13 @@ class CaseListView(CommonMixin, ListView):
         # context['closed_cases'] = closed_cases
         else: 
             cases = cases
+        context['cases'] = cases
         return context
 
 
 class CaseDetailView(CommonMixin, DetailView):
     template_name = 'case/case_detail.html'
+    # permission_required = "case.view_case"
 
 class CaseCreateView(CaseFormMixin, CreateView):
     # template_name = 'case/case_create.html'
@@ -79,4 +80,4 @@ class CaseDeleteView(CommonMixin, DeleteView):
     #     if not obj.owner.user_type == 'patient':
     #         raise Http404
     #     return obj
-    
+

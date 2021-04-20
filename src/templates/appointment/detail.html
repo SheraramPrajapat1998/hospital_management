@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Appointment Details
+{% endblock title %}
+
+{% block content %}
+<h1>Appointment Details</h1>
+<div class="table-responsive">
+    <table id="dtBasicExample" class="table table-hover table-bordered">
+        <tbody>
+            <tr>
+                <th scope="row">Appointment ID: </th>
+                <td>{{ appointment.id }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Patient Name: </th>
+                <td>{{ appointment.patient.get_fullname }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Patient's Username: </th>
+                <td>{{ appointment.patient.username }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Receptionist Name: </th>
+                <td>{{ appointment.receptionist }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Doctor Name: </th>
+                <td>{{ appointment.doctor }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Appointment Time: </th>
+                <td>{{ appointment.appointment_time }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Case Status</th>
+                <td>
+                    <strong {% if appointment.case.status == 'open' %} style=" color: green;" {% else %} style="color: red;" {% endif %}>
+                        {{ appointment.case.status|upper }}
+                    </strong>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Case Description: </th>
+                <td>{{ appointment.case.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

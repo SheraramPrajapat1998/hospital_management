@@ -3,7 +3,6 @@ from .validators import validate_future_date
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, User
 from django.core.validators import RegexValidator
-# from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
 
 GENDER = (

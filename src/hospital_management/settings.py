@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     # local apps
     'accounts.apps.AccountsConfig',
     'case.apps.CaseConfig',
-
+    'appointment.apps.AppointmentConfig',
+    
     # third party apps
     'sweetify',
     'crispy_forms',
