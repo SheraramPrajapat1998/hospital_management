@@ -31,6 +31,10 @@ class CustomUserAdmin(UserAdmin):
                   'father_name', 'mother_name', 'blood_group', 'marital_status',
                   'address1', 'address2', 'city', 'zipcode', 'state', 'last_login', 'date_joined' )}),
         ('Permissions', {'fields': ( 'is_active', 'is_staff', 'is_superuser')}),
+        ('Groups and User Permissions', {
+            'classes': ('collapse',),
+            'fields': ('groups', 'user_permissions'),
+        }),
     )
     add_fieldsets = (
         (None, {
@@ -41,7 +45,8 @@ class CustomUserAdmin(UserAdmin):
                   'address1', 'address2', 'city', 'zipcode', 'state', 'last_login', 'date_joined' )}
         ),
         ('Permissions', {'fields': ( 'is_active', 'is_staff', 'is_superuser')}),
-        ('Advanced options', {
+        ('Groups and User Permissions', {
+            'classes': ('collapse',),
             'fields': ('groups', 'user_permissions'),
         }),
     )
