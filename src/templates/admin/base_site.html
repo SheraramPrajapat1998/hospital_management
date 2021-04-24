@@ -1,0 +1,18 @@
+<!-- Note: Don't Edit this. This will edit build in Django site -->
+
+{% extends "admin/base.html" %}
+
+{% load static %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">
+        <img src="{% static 'hostpital_image1.png' %}" height="40px" style="border-radius: 50%;" />
+        Hospital Management Admin Portal
+    </a>
+</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Reports
+{% endblock title %}
+
+{% block extra_css %}
+{% endblock extra_css %}
+
+{% block content %}
+<h1>Reports</h1>
+<div class="table-responsive">
+    <table id="dtBasicExample" class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Patient</th>
+                <th scope="col">Receptionist</th>
+                <th scope="col">Filed Report Date</th>
+                <th scope="col">Closed report Date</th>
+                <th scope="col">Report Status</th>
+                <th scope="col">Report Detail</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in reports %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{ report.patient }}</td>
+                <td>{{ report.receptionist }}</td>
+                <td>{{ report.filed_date}}</td>
+                <td>{{ report.closed_date }}</td>
+                <td>
+                    <strong {% if report.status == 'open' %} style=" color: green;" {% else %} style="color: red;" {% endif %}>
+                        {{ report.status|upper }}
+                    </strong>
+                </td>
+                <td><a href="{{report.get_absolute_url}}">Detail</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
+
+
+{% block domready %}
+{% endblock domready %}

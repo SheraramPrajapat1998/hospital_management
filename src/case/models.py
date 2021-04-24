@@ -15,7 +15,7 @@ class Case(models.Model):
     status          = models.CharField(max_length=10, choices=STATUS_CHOICES, default='open') # status of case CLOSE/OPEN
 
     def __str__(self):
-        return f"{self.patient.username} - {self.description[:20]}"
+        return f"Patient: {self.patient.username} - Desc:{self.description[:20]}"
     
     def get_absolute_url(self):
         return reverse('case:case_detail', kwargs={'pk': self.pk})

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'case.apps.CaseConfig',
     'appointment.apps.AppointmentConfig',
+    'report.apps.ReportConfig',
     
     # third party apps
     'sweetify',

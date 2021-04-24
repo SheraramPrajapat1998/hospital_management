@@ -4,6 +4,8 @@ from django.db.models.base import Model
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.edit import FormMixin, FormView
+
+from accounts.decorators import doctor_required
 from .models import Patient, Doctor, User, Receptionist
 from .forms import AccountantRegistrationForm, DoctorRegistrationForm, NurseRegistrationForm, ReceptionistRegistrationForm, UserRegistrationForm, UserEditForm, PatientRegistrationForm
 from django.contrib import auth
@@ -137,7 +139,7 @@ def register_patient(request):
         return render(request, 'accounts/register_done.html', {'new_user': user})
     return render(request, 'accounts/register.html', {'user_form': u_form, 'profile_form':p_form})
 
-
+@doctor_required
 @transaction.atomic
 def register_doctor(request):
     u_form = UserRegistrationForm(data=request.POST or None, files=request.FILES or None)

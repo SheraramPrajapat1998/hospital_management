@@ -63,6 +63,10 @@ class User(AbstractUser):
     def __str__(self):
         return f"{self.first_name} {self.last_name}({self.username})"
 
+    # def user_type(self):
+    #     if self.user.is_superuser:
+    #         self.user_type = 'admin'
+    #     return self.user_type
 
 class Staff(models.Model):
     aadhar_number   = models.BigIntegerField(verbose_name='Aadhar Number')
@@ -95,7 +99,7 @@ class Doctor(models.Model):
     languages   = models.CharField(max_length=20)
     speciality  = models.CharField(max_length=20)
     department  = models.CharField(max_length=50, choices=DEPARTMENTS)    
-    # patients    = models.ManyToManyField(Patient, related_name='doctors')
+    patients    = models.ManyToManyField(Patient, related_name='doctors')
 
     # def get_absolute_url(self):
     #     return reverse('account:user', kwargs={'pk': self.pk})
