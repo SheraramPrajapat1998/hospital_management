@@ -2,24 +2,37 @@
 {% load crispy_forms_tags %}
 
 {% block title %}Create an account{% endblock %}
-
 {% block content %}
+
+  
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link" href="{% url 'patient_register' %}">Register Patient</a>
+    <a class="nav-link {% if register_var == 'Patient' %}active {% endif %}" href="{% url 'patient_register' %}">Register Patient</a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link active" href="{% url 'doctor_register' %}">Register Doctor</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{% url 'receptionist_register' %}">Register Receptionist</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{% url 'nurse_register' %}">Register Nurse</a>
-  </li>
+  <!-- {% if request.user.is_authenticated %} -->
+    <li class="nav-item">
+      <a class="nav-link {% if register_var == 'Doctor' %}active {% endif %}" href="{% url 'doctor_register' %}">Register Doctor</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if register_var == 'Receptionist' %}active {% endif %}" href="{% url 'receptionist_register' %}">Register Receptionist</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if register_var == 'Nurse' %}active {% endif %}" href="{% url 'nurse_register' %}">Register Nurse</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if register_var == 'Accountant' %}active {% endif %}" href="{% url 'accountant_register' %}">Register
+        Accountant</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if register_var == 'Lab Technician' %}active {% endif %}" 
+        href="{% url 'lab_technician_register' %}">Register Lab Technician</a>
+    </li>
+  <!-- {% else %}
+    You are not logged in
+  {% endif %} -->
 </ul>
 <div class="offset-md-3 col-md-6">  
-  <h1>Create an account</h1>
+  <h1>Create a {{register_var}}'s account</h1>
   <p>Please, sign up using the following form:</p>
   <form method="post" action="" enctype="multipart/form-data">
     {% csrf_token %}

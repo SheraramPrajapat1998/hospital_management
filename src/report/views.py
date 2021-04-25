@@ -11,7 +11,7 @@ from django.urls import reverse_lazy
 
 class CommonReportMixin(LoginRequiredMixin, PermissionRequiredMixin):
     model = Report
-    permission_required = "report.view_report"
+    # permission_required = "report.view_report"
 
 class ReportListView(CommonReportMixin, ListView):
     template_name = "report/list.html"

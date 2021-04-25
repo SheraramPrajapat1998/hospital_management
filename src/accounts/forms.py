@@ -3,9 +3,10 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.forms import fields
+from django.forms.models import model_to_dict
 
 # from accounts.admin import CustomUserAdmin
-from .models import Accountant, Nurse, Patient, Doctor, User, Receptionist
+from .models import Accountant, LabTechnician, Nurse, Patient, Doctor, User, Receptionist
 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import User
@@ -110,6 +111,18 @@ class AccountantRegistrationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+class LabTechnicianRegistrationForm(forms.ModelForm):
+    class Meta:
+        model = LabTechnician
+        fields = ['aadhar_number', ]
+        exclude = ['user', ]
+
+    # def save(self, commit=False):
+    #     user = super().save(commit=False)
+    #     user.user_type = "lab_tech"
+    #     if commit:
+    #         user.save()
+    #     return user
 
 class UserEditForm(forms.ModelForm):
     email = forms.EmailField(label='Email')

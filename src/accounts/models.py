@@ -32,6 +32,7 @@ USER_TYPES = (
     ('admin', 'Admin'),
     ('nurse', 'Nurse'),
     ('accountant', 'Accountant'),
+    ('lab_tech', 'Lab Tech')
 )
 
 class User(AbstractUser):
@@ -63,10 +64,10 @@ class User(AbstractUser):
     def __str__(self):
         return f"{self.first_name} {self.last_name}({self.username})"
 
-    # def user_type(self):
-    #     if self.user.is_superuser:
+    # def save(self, *args, **kwargs):
+    #     if self.username.is_superuser:
     #         self.user_type = 'admin'
-    #     return self.user_type
+    #     super().save(*args, **kwargs)
 
 class Staff(models.Model):
     aadhar_number   = models.BigIntegerField(verbose_name='Aadhar Number')
@@ -87,7 +88,7 @@ class Patient(models.Model):
     #     return reverse('account:user', kwargs={'pk': self.pk})
 
 
-class Doctor(models.Model):
+class Doctor(Staff):
     DEPARTMENTS = [('Cardiologist', 'Cardiologist'),
                     ('Dermatologists', 'Dermatologists'),
                     ('Emergency Medicine Specialists', 'Emergency Medicine Specialists'),
@@ -125,7 +126,11 @@ class Accountant(Staff):
     user  = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     
 
+class LabTechnician(Staff):
+    user    = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name_plural = 'Lab Technician'
 
 # class StaffDocuments(models.Model):
 #     """ Employee Document Table"""
