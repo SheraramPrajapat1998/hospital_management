@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 
-from .models import Accountant, Doctor, Nurse, Patient, Receptionist
+from .models import Accountant, Doctor, LabTechnician, Nurse, Patient, Receptionist
 from django.contrib.auth.admin import UserAdmin
 from .models import User
 
@@ -18,6 +18,7 @@ admin.site.register(Doctor)
 admin.site.register(Accountant)
 admin.site.register(Nurse)
 admin.site.register(Receptionist)
+admin.site.register(LabTechnician)
 # admin.site.register(User, UserAdmin)
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):

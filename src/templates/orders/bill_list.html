@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Bills
+{% endblock title %}
+
+{% block extra_css %}
+{% endblock extra_css %}
+
+{% block content %}
+<h1>Bills</h1>
+<div class="table-responsive">
+    <table id="dtBasicExample" class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Patient Name</th>
+                <th scope="col">Receptionist</th>
+                <th scope="col">Filed Bill Date</th>
+                <th scope="col">Closed Bill Date</th>
+                <th scope="col">Bill Status</th>
+                <th scope="col">Paid</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bill in bills %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{ bill.patient }}</td>
+                <td>{{ bill.receptionist }}</td>
+                <td>{{ bill.filed_date}}</td>
+                <td>{{ bill.closed_date }}</td>
+                <td>
+                    <strong {% if bill.paid %} style=" color: green;" {% else %} style="color: red;" {% endif %}>{{ bill.paid }}
+                    </strong>
+                </td>
+                <td><a href="{{bill.get_absolute_url}}">Detail</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
+
+
+{% block domready %}
+{% endblock domready %}

@@ -33,6 +33,8 @@ class Bill(models.Model):
 class BillItem(models.Model):
     bill    = models.ForeignKey(Bill, related_name='bill_items', on_delete=models.CASCADE)
     item    = models.ForeignKey(Items, related_name='billitem_items', on_delete=models.CASCADE)
+    price   = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity    = models.PositiveIntegerField(default=1)
     
     def __str__(self):
         return "{self.id}"
