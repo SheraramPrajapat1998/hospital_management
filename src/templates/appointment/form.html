@@ -10,19 +10,23 @@
 {% endblock %}
 
 {% block content %}
-    <h1>
-        {% if object %}
-            Edit Appointment "{{ object.title }}"
-        {% else %}
-            Create a new Appointment
-        {% endif %}
-    </h1>
-    <div class="module">
-        <h3>Appointment Info</h3>
-        <form method="post">
-            {{ form|crispy }}
-            {% csrf_token %}
-            <p><input type="submit" value="Save Appointment" class="btn btn-success"></p>
-        </form>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1>
+                {% if object %}
+                    Edit Appointment "{{ object.title }}"
+                {% else %}
+                    Create a new Appointment
+                {% endif %}
+            </h1>
+            <div class="module">
+                <h3>Appointment Info</h3>
+                <form method="post">
+                    {{ form|crispy }}
+                    {% csrf_token %}
+                    <p><input type="submit" value="Save Appointment" class="btn btn-success"></p>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}

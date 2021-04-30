@@ -1,3 +1,6 @@
 1. Delete all migration files
     find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
     find . -path "*/migrations/*.pyc"  -delete
+
+2. Remove db sqlite database
+    rm -f tmp.db db.sqlite3

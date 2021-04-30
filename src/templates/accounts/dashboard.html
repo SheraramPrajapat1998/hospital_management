@@ -7,4 +7,30 @@
 
 {% block content %}
     <h1>Welcome to Dashboard, {{ request.user.username }} [User Type: {{ request.user.user_type }}]</h1>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link"
+                href="{% url 'stock:stock_list' %}">Stocks</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+                href="{% url 'case:case_list' %}">Cases</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+                href="{% url 'appointment:appointment_list' %}">Appointments</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+                href="#">Bills</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+                href="#">Reports</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+                href="#">Register Lab Technician</a>
+        </li>
+    </ul>
 {% endblock content %}

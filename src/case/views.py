@@ -24,6 +24,7 @@ def generate_case(request):
 class CommonMixin(LoginRequiredMixin, PermissionRequiredMixin):
     model = Case
     permission_required = "case.view_case"
+    permission_denied_message = "Sorry, You are not authorized to this page."
 
 class CaseFormMixin(CommonMixin):
     form_class = CaseForm
@@ -67,7 +68,7 @@ class CaseCreateView(CaseFormMixin, CreateView):
     #     return super().get(request, *args, **kwargs)
 
 class CaseUpdateView(CaseFormMixin, UpdateView):
-    template_name = 'case/case_update.html'
+    # template_name = 'case/case_update.html'
     permission_required = 'case.change_case'
     
 class CaseDeleteView(CommonMixin, DeleteView):

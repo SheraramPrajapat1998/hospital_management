@@ -1,7 +1,7 @@
 
 <h1>Delete "{{ object }}"</h1>
 <p>Are you sure want to delete "{{ object }}" ?</p>
-<form action="." method="post" class="form-control">
+<form action="." method="post">
     {% csrf_token %}
     <a href="{{ object.get_absolute_url }}">No, take me back</a>
     <button type="submit">Yes, Delete </button>

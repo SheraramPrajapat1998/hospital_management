@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'case.apps.CaseConfig',
     'appointment.apps.AppointmentConfig',
     'report.apps.ReportConfig',
-    
+    'stock.apps.StockConfig',
+
     # third party apps
     'sweetify',
     'crispy_forms',

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Edit "{{ stock.name }}"
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1>Edit "{{ stock.name }}"</h1>
+            <div class="module">
+                <h2>Stock Items</h2>
+                <form method="post">
+                    {{ formset|crispy }}
+                    {{ formset.management_form|crispy }}
+                    {% csrf_token %}
+                    <input type="submit" value="Save modules" class="btn btn-success">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

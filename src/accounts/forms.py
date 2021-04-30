@@ -71,7 +71,7 @@ class PatientRegistrationForm(forms.ModelForm):
 class DoctorRegistrationForm(forms.ModelForm):
     class Meta:
         model = Doctor
-        fields = ['languages', 'speciality', 'department']
+        fields = ['languages', 'speciality', 'aadhar_number', 'department', 'qualificationDoc', 'IdProof', 'addressProof', 'otherDoc']
         exclude = ['user', 'patient']
 
     def save(self, commit=False):
@@ -84,7 +84,7 @@ class DoctorRegistrationForm(forms.ModelForm):
 class ReceptionistRegistrationForm(forms.ModelForm):
     class Meta:
         model = Receptionist
-        fields = []
+        fields = ['aadhar_number', 'qualificationDoc', 'IdProof', 'addressProof', 'otherDoc']
         exclude = ['user', 'patient']
 
     def save(self, commit=False):
@@ -96,7 +96,7 @@ class ReceptionistRegistrationForm(forms.ModelForm):
 class NurseRegistrationForm(forms.ModelForm):
     class Meta:
         model = Nurse
-        fields = []
+        fields = ['aadhar_number', 'qualificationDoc', 'IdProof', 'addressProof', 'otherDoc']
         exclude = ['user', ]
 
 class AccountantRegistrationForm(forms.ModelForm):
@@ -114,7 +114,7 @@ class AccountantRegistrationForm(forms.ModelForm):
 class LabTechnicianRegistrationForm(forms.ModelForm):
     class Meta:
         model = LabTechnician
-        fields = ['aadhar_number', ]
+        fields = ['aadhar_number', 'qualificationDoc', 'IdProof', 'addressProof', 'otherDoc']
         exclude = ['user', ]
 
     # def save(self, commit=False):

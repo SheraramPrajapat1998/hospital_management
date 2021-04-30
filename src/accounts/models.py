@@ -69,12 +69,24 @@ class User(AbstractUser):
     #         self.user_type = 'admin'
     #     super().save(*args, **kwargs)
 
+def user_directory_path(instance, filename):
+    """file will be uploaded to given path"""
+    return 'Staff Docs/{0}/{1}'.format(instance.user.username, filename)
+
 class Staff(models.Model):
     aadhar_number   = models.BigIntegerField(verbose_name='Aadhar Number')
     empCategory     = models.CharField(max_length=20, blank=True, verbose_name='Employee Category')
+    qualificationDoc    = models.FileField(upload_to=user_directory_path, blank=True)
+    IdProof             = models.FileField(upload_to=user_directory_path, blank=True)
+    addressProof        = models.FileField(upload_to=user_directory_path, blank=True)
+    otherDoc            = models.FileField(upload_to=user_directory_path, blank=True)
 
     class Meta:
         abstract = True
+
+
+# class StaffDocuments(models.Model):
+#     user                = models.OneToOneField(Staff, on_delete=models.CASCADE)
 
 class Patient(models.Model):
     user                = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

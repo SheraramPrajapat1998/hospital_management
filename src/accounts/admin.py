@@ -15,9 +15,9 @@ admin.site.index_title = "Welcome to Hospital Management Portal"
 
 admin.site.register(Patient)
 admin.site.register(Doctor)
-# admin.site.register(Accountant)
-# admin.site.register(Nurse)
-# admin.site.register(Receptionist)
+admin.site.register(Accountant)
+admin.site.register(Nurse)
+admin.site.register(Receptionist)
 # admin.site.register(User, UserAdmin)
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):

@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-md navbar-light sticky-top" style="background-color: #D9D4CE;">
 
   <a class="navbar-brand" href="">
-    E-commerce
+    Hospital Management System
   </a>
 
   <!-- Breadcrumbs -->
@@ -37,8 +37,8 @@
       {% if request.user.is_authenticated %}
         <li class="nav-item" >
           <a href="" class="nav-link navbar-link-2 waves-effect">
-            <span class="badge badge-danger">2</span>
-            <i class="fas fa-shopping-cart pl-0" style="font-size: 1.8rem;"></i>
+            <span class="badge badge-warning">{{ request.user.username}}</span>
+            <!-- <i class="fas fa-shopping-cart pl-0" style="font-size: 1.8rem;"></i> -->
           </a>
         </li>
         <li class="nav-item dropdown">
@@ -60,11 +60,11 @@
         </li>
       {% endif %}
 
-      <li class="nav-item ">
+      <!-- <li class="nav-item ">
         <a href="" class="nav-link waves-effect">
           Shop
         </a>
-      </li>
+      </li> -->
       <li class="nav-item">
         <a href="#!" class="nav-link waves-effect">
           Contact

@@ -10,19 +10,24 @@
 {% endblock %}
 
 {% block content %}
-    <h1>
-        {% if object %}
-            Edit case "{{ object.title }}"
-        {% else %}
-            Create a new case
-        {% endif %}
-    </h1>
-    <div class="module">
-        <h3>Case Info</h3>
-        <form method="post">
-            {{ form|crispy }}
-            {% csrf_token %}
-            <p><input type="submit" value="Save case" class="btn btn-success"></p>
-        </form>
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <h1>
+                {% if object %}
+                    Edit case "{{ object.pk }}"
+                {% else %}
+                    Create a new case
+                {% endif %}
+            </h1>
+            <div class="module">
+                <h3>Case Info</h3>
+                <form method="post">
+                    {{ form|crispy }}
+                    {% csrf_token %}
+                    <p><input type="submit" value="Save case" class="btn btn-success"></p>
+                </form>
+            </div>
+        </div>
     </div>
+
 {% endblock %}

@@ -114,7 +114,7 @@ def register_patient(request):
         return render(request, 'accounts/register_done.html', {'new_user': user})
     return render(request, 'accounts/register.html', {'user_form': u_form, 'profile_form':p_form, 'register_var':'Patient'})
 
-@doctor_required
+# @doctor_required
 @transaction.atomic
 def register_doctor(request):
     u_form = UserRegistrationForm(data=request.POST or None, files=request.FILES or None)

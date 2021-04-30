@@ -26,6 +26,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('case/', include('case.urls', namespace='case')),
     path('appointment/', include('appointment.urls', namespace='appointment')),
+    path('stock/', include('stock.urls', namespace='stock')),
     path('report/', include('report.urls', namespace='report')),
     path('__debug__/', include(debug_toolbar.urls)),
 ]

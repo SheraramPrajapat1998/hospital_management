@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Stock Details
+{% endblock title %}
+
+{% block content %}
+<h1>Stock Details</h1>
+<div class="table-responsive">
+    <table id="dtBasicExample" class="table table-hover table-bordered">
+        <tbody>
+            <tr>
+                <th scope="row">Stock ID: </th>
+                <td>{{ stock.id }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Stock Name: </th>
+                <td>{{ stock.name }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Stock's Description: </th>
+                <td>{{ stock.description }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Stock's Total Items: </th>
+                <td>{{ stock.get_total_items }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Stock Purchase Date: </th>
+                <td>{{ stock.purchase_date }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Stock Expiry Date</th>
+                <td>{{ stock.expiry_date }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
